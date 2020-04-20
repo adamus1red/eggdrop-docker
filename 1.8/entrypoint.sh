@@ -111,6 +111,12 @@ EOS
     ln -sf /home/eggdrop/eggdrop/data/${CHANFILE} /home/eggdrop/eggdrop/${CHANFILE}
   fi
 
+### Check for existing channel file and create link to data dir as backup
+  #CHANFILE=$(grep "set chanfile " ${CONFIG} |cut -d " " -f 3|cut -d "\"" -f 2)
+  if [ -e /home/eggdrop/eggdrop/data/eggdrop.crt ] && [ -e /home/eggdrop/eggdrop/data/eggdrop.key ] ; then
+    ln -sf /home/eggdrop/eggdrop/data/eggdrop.crt /home/eggdrop/eggdrop/eggdrop.crt
+    ln -sf /home/eggdrop/eggdrop/data/eggdrop.key /home/eggdrop/eggdrop/eggdrop.key
+  fi
 
 ### Remove previous pid file, if present
   PID=$(grep "set pidfile" ${CONFIG} |awk '{print $3}')
